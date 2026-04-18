@@ -54,8 +54,14 @@ async def desautorizar(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def responder(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
+    username = update.effective_user.username or "sin username"
+    nombre = update.effective_user.first_name or "Desconocido"
     if chat_id not in usuarios_autorizados:
         await update.message.reply_text("No tienes acceso a este bot. Contacta con el administrador.")
+        await context.bot.send_message(
+            chat_id=MI_CHAT_ID,
+            text=f"Intento de acceso no autorizado:\nNombre: {nombre}\nUsername: @{username}\nID: {chat_id}"
+        )
         return
     mensaje = update.message.text
     if chat_id not in historial:
