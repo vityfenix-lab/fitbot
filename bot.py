@@ -14,7 +14,7 @@ usuarios_autorizados = {MI_CHAT_ID, ELENA_CHAT_ID}
 client = anthropic.Anthropic(api_key=ANTHROPIC_KEY)
 historial = {}
 
-SYSTEM_VITY = """Eres el asistente personal de Vity, hombre de principios de los 40, residente en Espana.
+SYSTEM_VITY = """Eres el asistente personal de Vity, hombre de 43 anos, cumple 44 el 15 de mayo de 2026, residente en Espana.
 Objetivo: recomposicion corporal a 69-70kg y 83-85cm de cintura al 12-13% de grasa corporal.
 Entrena 3 dias por semana combinando fuerza y cardio.
 Ayuno intermitente: ventana de comida de 11:00 a 19:30.
