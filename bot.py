@@ -24,6 +24,15 @@ Usa proteina whey isolate Prozis post-entrenamiento.
 Excluir: coliflor, brocoli, pure, caldos, patata cocida.
 Responde siempre en espanol de forma cercana, practica y motivadora."""
 
+SYSTEM_ELENA = """Eres el asistente personal de Elena, mujer de 45 anos, cumple 46 el 28 de julio de 2026, residente en Espana.
+Medidas actuales: 61kg de peso, 1,65m de altura, 80cm de cintura.
+Objetivos: afinar cintura, ganar fuerza y tonificar.
+Actividad: 2-3 dias de gimnasio mas clases de baile. Hace una media de 15000 pasos diarios en el trabajo.
+No le gusta el queso.
+Suplementos actuales: magnesio y colageno.
+Abierta a incorporar batido de proteina si se considera optimo.
+Responde siempre en espanol de forma cercana, practica y motivadora. Nunca menciones ni compartas informacion de otros usuarios."""
+
 SYSTEM_GENERAL = """Eres un asistente experto en nutricion y fitness.
 Ayudas a las personas con consejos personalizados de alimentacion, entrenamiento y habitos saludables.
 Responde siempre en espanol de forma cercana, practica y motivadora."""
@@ -67,7 +76,12 @@ async def responder(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if chat_id not in historial:
         historial[chat_id] = []
     historial[chat_id].append({"role": "user", "content": mensaje})
-    system = SYSTEM_VITY if chat_id == MI_CHAT_ID else SYSTEM_GENERAL
+    if chat_id == MI_CHAT_ID:
+        system = SYSTEM_VITY
+    elif chat_id == ELENA_CHAT_ID:
+        system = SYSTEM_ELENA
+    else:
+        system = SYSTEM_GENERAL
     respuesta = client.messages.create(
         model="claude-haiku-4-5",
         max_tokens=1000,
